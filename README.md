@@ -19,3 +19,7 @@ Lotosta voi viikottain voittaa päävoittona satunnaisesti 1,2,3,...,10 miljoona
 
 Sijoittamisen vuosituotot määräytyvät t-jakauman mukaan (df = 3, ka = 1.07, sd = 0.03).
 Mikäli vuosituottojakauma kuitenkin menee pakkaselle asetetaan vuosituotoksi -80 %.
+
+## Simulaatio
+
+Lasketaan voittojakaumat 10 000 elämän ajalta Monte Carlo -simulaationa lottoamiselle ja sijoittamiselle.
