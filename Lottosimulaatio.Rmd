@@ -1,0 +1,88 @@
+---
+title: "Lottosimulaatio"
+author: "Tero Jalkanen"
+date: "18.10.2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+```
+
+# Intro
+
+Suomalainen voittaa aina, mutta toisaalta melko harva suomalainen. Kannattaisiko samat rahat sijoittaa osakeindeksiin, vai tarvittaisiinko sijoittamiseen isompia rahoja? Selvitetään asiaa Monte Carlo -simulaatioiden avulla.
+
+# Simulaatio
+
+Simuloidaan 10 000 sattumanvaraista lopputulemaa kuvitteellisille ihmisille jotka ovat joko laittaneet rahansa lottoon tai sijoittaneet samat rahat indeksiin. Lottoamiseen käytetään 1 €/viikko, jolla ostetaan yksi rivi. Jokainen yksilö pelaa samaa riviä kerran viikossa 50 vuoden ajan. Päävoittona on viikottain sattumanvaraisesti 1-10 miljoonaa euroa, miljoonan euron porrastuksin. Muut voitot seuraavasti:
+
+* 6 oikein: 2000 €
+
+* 5 oikein: 200 €
+
+* 4 oikein: 10 €.
+
+Lottoamisen vastapainoksi 10 000 kuvitteellista henkilöä sijoittaa vuosittain 52 euroa osakeindeksiin, jonka keskimääräinen vuosituotto-odotus on 7%:a normaalivuonna. Indeksin vuosituotto heiluu sattumanvaraisesti ja saattaa leikata salkun kokonaissumman hyvinkin pieneksi. Tämän lisäksi keskimäärin joka 15. vuosi tapahtuu ns. pörssiromahdus, jonka laskee keskimääräisen vuosituoton -25%:iin (tässäkin satunnainen heilunta).
+
+Katsotaan rahansa sijoittaneille ihmisille käy.
+
+
+```{r tulokset, include=FALSE}
+# Tulokset ao. skriptissa. Huom! ajaminen vie aikaa
+source("Lottosimulaatio.R") # Simuloidut tuottojakaumat lotto vs. sijoittaminen
+```
+
+
+# Lottoon sijoittaneet
+
+Joku on myös voittanut lotossa. Ihmekö tuo. Pelasimmehan viikottain lottoa 10 000 ihmisen voimin ja 50 vuoden ajan. Yhteensä siis `r 52*50*10000` riviä. Tässä simulaatiossa kohdalle osui kolme päävoittoa, joiden turvin kolme henkilöä jäi lottoamisessaan reippaasti plussan puolelle. 
+
+```{r, warning=FALSE, fig.cap= "**Kuva 1.** Simuloitujen lottotuottojen jakauma. Huomaa logaritminen y-akseli, jonka turvin kolme yksittäistä päävoittoa erottuvat."}
+pl1
+```
+
+Huomattavan suuri osa ihmisistä ei kuitenkaan jäänyt pelaamisessaan voitolle, joka nähdään kun x-akselia kohdistetaan lähemmäs 0 euron tuntumaan.
+
+```{r, warning=FALSE, fig.cap= "**Kuva 2.** Tarkemmin katsottaessa suurin osa lottoajista jäi kuitenkin tappiolle."}
+pl3
+```
+
+# Indeksiin sijoittaneet
+
+Vertaillaanpa sitten miten kävi niille 10 000, jotka säästivät viikottaisen lottoeuron ja sijoittivat kerran vuodessa 52 euroa osakeindeksiin. Heistä jokainen siis sijoitti pörssiin yhteensä `r 52*50` euroa.
+
+```{r, warning=FALSE, fig.cap= "**Kuva 3.** Voittojakauma osakeindeksiin sijoittaneille. Suurin osa ihmisistä on saanut rahoilleen hyvän tuoton. Vaikkakin simulaatioindeksi on piirun verran turhan optimistinen."}
+pl2
+```
+
+Historiallisesti indeksi tuottaa tappiota noin joka neljäs vuosi (lähde: nopea googlaus). 50 vuodessa niitä pitäisi siis kertyä noin `r 50/4`.
+
+
+```{r, echo=FALSE}
+
+neg_vuodet <- replicate(n = 10000, {
+  #50 vuoden vuosituotot 
+  S <- replicate(50, {
+    vuosituotto <- 1.07 + rt(1,df = 3)*0.06 # t-jakauma ka = 1.07, sd = 0.04
+  })
+   #Kuinka monta negatiivisen tuoton vuotta / 50 v
+   sum(S<1) 
+})
+
+
+```
+
+Simulaatiomme antaa keskimäärin vain `r mean(neg_vuodet)` negatiivisen tuoton vuotta, joten jakaumaa tulisi hieman muokata jotta tulokset vastaisivat paremmin pörssin menneitä tuottoja.
+
+
+# Loppuvertailu
+
+Alla vertailtu vielä muutamia sijoittamalla ja lottoamalla kerättyjen tuottojakaumien tunnuslukuja.
+
+```{r}
+knitr::kable(df, caption = "Tuottojen jakauman tunnuslukuja lottoamisella ja sijoittamisella")
+```
+
