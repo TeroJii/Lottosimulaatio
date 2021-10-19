@@ -25,4 +25,4 @@ Lisäksi keskimäärin joka 15. vuosi tapahtuu ns. pörssiromahdus, joka laskee 
 
 ## Simulaatio
 
-Lasketaan voittojakaumat 10 000 elämän ajalta Monte Carlo -simulaationa lottoamiselle ja sijoittamiselle.
+Lasketaan voittojakauma 10 000 ihmiselle 50 vuoden ajalta Monte Carlo -simulaationa lottoamis- ja sijoittamisstrategialla.
