@@ -21,7 +21,7 @@ Sijoittamisen vuosituotot määräytyvät t-jakauman mukaan (df = 3, ka = 1.07, 
 Mikäli vuosituottojakauma kuitenkin menee pakkaselle asetetaan vuosituotoksi -80 %.
 Lisäksi keskimäärin joka 15. vuosi tapahtuu ns. pörssiromahdus, joka laskee jakauman keskiarvon 0.75 tasolle.
 
-**Huom. jakauma ei täysin vastaa historiallisten tuottojen jakaumaa. Negatiivisen tuoton vuosia tulee simulaatiossa hieman harvemmin. **
+**Huom. jakauma ei täysin vastaa historiallisten tuottojen jakaumaa. Negatiivisen tuoton vuosia tulee simulaatiossa hieman harvemmin kuin pörssihistorian mukaan (nopealla googlauksella).
 
 ## Simulaatio
 
