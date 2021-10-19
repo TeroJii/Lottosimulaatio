@@ -33,10 +33,10 @@ n <- 52*50 #rivi viikossa, 50 vuoden ajan
 
 lottoa.f <- function(){
   #Rivi jota pelataan koko ikä
-  numerot <- sample(1:37, size = 7)
+  numerot <- sample(1:40, size = 7)
   #Voitot eliniän ajalta
   S <- replicate(n, {
-    viikonrivi <- sample(1:37, size = 7)
+    viikonrivi <- sample(1:40, size = 7)
     viikonpotti <- sample(seq(from = 10^6, to = 10^7, by = 10^6), 1) #miljoonasta kymmenneen
     oikeita <- sum(numerot %in% viikonrivi)
     voitot[8] <- (rivin_hinta + viikonpotti) # Päävoitto vaihtuu viikottain
@@ -86,7 +86,7 @@ S3 <- replicate(n = 10000,{
 
 #Voittojen jakauma Lotto
 pl1 <- ggplot(data = data.frame(S2), aes(x=S2)) +
-  geom_histogram(color = "black", fill = "red") +
+  geom_histogram(color = "black", fill = "red", binwidth = 100) +
   scale_y_log10() +
   geom_vline(xintercept = c(0), color = "red", lty = 2) +
   labs(x = "Voitot 50 vuoden lottoamisen jälkeen (€)") +
@@ -98,21 +98,20 @@ pl2 <- ggplot(data = data.frame(S3), aes(x=S3)) +
   geom_histogram(color = "black", fill = "red") +
   geom_vline(xintercept = 52*50, color = "red", lty = 2) + #sijoitettu paaoma
   labs(x = "Voitot 50 vuoden indeksiin sijoittamisen jälkeen (€)") +
-  ggtitle("Monte Carlo -simulaatio, jossa sijoitettu indeksiin 50 vuotta (keskiarvotuotto 7%)", 
+  ggtitle("Monte Carlo -simulaatio, jossa sijoitettu indeksiin 50 vuotta", 
           subtitle = "Simuloitujen 10000 elämän voittojakauma (vuosikulut 1%)")
 
 
-#ggsave(filename = "IndeksisijoittamisenJakauma.jpg", device = "jpg")
+#ggsave(filename = "IndeksisijoittamisenJakauma.jpg", plot = pl2, device = "jpg", width = 6, height = 4, units = "in")
 
-#Lotto ilman päävoittoa
+#Lotto lineaarinen y-akseli
 pl3 <- ggplot(data = data.frame(S2), aes(x=S2)) +
   geom_histogram(color = "black", fill = "red", binwidth = 100) +
-  scale_x_continuous(limits = c(-2600,2000)) +
   labs(x = "Voitot 50 vuoden lottoamisen jälkeen (€)") +
-  ggtitle("Monte Carlo -simulaatio, jossa lottoa pelattu samalla rivillä 50 vuotta", 
-          subtitle = "Simuloitujen 10000 elämän voittojakauma (kuvassa ei päävoittoja)")
+  ggtitle("Monte Carlo -simulaatio, jossa lottoa pelattu 50 vuotta", 
+          subtitle = "Simuloitujen 10000 elämän voittojakauma")
 
-#ggsave(filename = "JakaumaNollanTuntumassa.jpg", device = "jpg")
+#ggsave(filename = "JakaumaNollanTuntumassa.jpg", plot = pl3, device = "jpg", width = 6, height = 4, units = "in")
 
 df <- data.frame(lotto = S2, indeksi = S3) %>% 
   pivot_longer(cols = everything(), names_to = "kohde", values_to = "arvo") %>% 
