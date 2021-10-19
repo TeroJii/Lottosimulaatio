@@ -1,6 +1,6 @@
 ---
 title: "Lottosimulaatio"
-author: "Tero Jalkanen"
+author: "Tero J"
 date: "18.10.2021"
 output: html_document
 ---
