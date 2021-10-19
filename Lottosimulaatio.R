@@ -91,7 +91,7 @@ pl1 <- ggplot(data = data.frame(S2), aes(x=S2)) +
   geom_vline(xintercept = c(0), color = "red", lty = 2) +
   labs(x = "Voitot 50 vuoden lottoamisen jälkeen (€)") +
   ggtitle("Monte Carlo -simulaatio, jossa lottoa pelattu samalla rivillä 50 vuotta", 
-          subtitle = "Simuloitujen 10000 elämän voittojakauma")
+          subtitle = "Simuloitujen 10000 ihmisen voittojakauma")
 
 #Voittojen jakauma Indeksi
 pl2 <- ggplot(data = data.frame(S3), aes(x=S3)) +
@@ -99,7 +99,7 @@ pl2 <- ggplot(data = data.frame(S3), aes(x=S3)) +
   geom_vline(xintercept = 52*50, color = "red", lty = 2) + #sijoitettu paaoma
   labs(x = "Voitot 50 vuoden indeksiin sijoittamisen jälkeen (€)") +
   ggtitle("Monte Carlo -simulaatio, jossa sijoitettu indeksiin 50 vuotta", 
-          subtitle = "Simuloitujen 10000 elämän voittojakauma (vuosikulut 1%)")
+          subtitle = "Simuloitujen 10000 ihmisen voittojakauma (vuosikulut 1%)")
 
 
 #ggsave(filename = "IndeksisijoittamisenJakauma.jpg", plot = pl2, device = "jpg", width = 6, height = 4, units = "in")
@@ -109,7 +109,7 @@ pl3 <- ggplot(data = data.frame(S2), aes(x=S2)) +
   geom_histogram(color = "black", fill = "red", binwidth = 100) +
   labs(x = "Voitot 50 vuoden lottoamisen jälkeen (€)") +
   ggtitle("Monte Carlo -simulaatio, jossa lottoa pelattu 50 vuotta", 
-          subtitle = "Simuloitujen 10000 elämän voittojakauma")
+          subtitle = "Simuloitujen 10000 ihmisen voittojakauma")
 
 #ggsave(filename = "JakaumaNollanTuntumassa.jpg", plot = pl3, device = "jpg", width = 6, height = 4, units = "in")
 
