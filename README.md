@@ -1,7 +1,7 @@
 # Lottosimulaatio
 Simuloidaan tuottojakautumia pelatessa lottoa 50 vuoden ajan vs. sama sijoitettuna indeksiin.
 
-## Sijoitetut rahaa
+## Sijoitetut rahat
 
 Rahaa sijoitetaan 1 euro viikossa jolla ostetaan joko viikottainen lottorivi tai vaihtoehtoisesti vuosittain sijoitetaan 52 euroa pörssi-indeksiin.
 
